@@ -1,18 +1,16 @@
 package model;
 
-public class TeamHomeStats {
+public class TeamStats {
 	
-	private Team team;
 	private double totalMadeShots, openPlayMadeShots, freeKickMadeShots, penaltyMadeShots, openPlayMadeGoals, freeKickMadeGoals, penaltyMadeGoals;
 	private double totalConcededShots, openPlayConcededShots, freeKickConcededShots, penaltyConcededShots, openPlayConcededGoals, freeKickConcededGoals, penaltyConcededGoals;
 	
-	public TeamHomeStats(Team team, double totalMadeShots, double openPlayMadeShots, double freeKickMadeShots,
+	public TeamStats(double totalMadeShots, double openPlayMadeShots, double freeKickMadeShots,
 			double penaltyMadeShots, double openPlayMadeGoals, double freeKickMadeGoals, double penaltyMadeGoals,
 			double totalConcededShots, double openPlayConcededShots, double freeKickConcededShots,
 			double penaltyConcededShots, double openPlayConcededGoals, double freeKickConcededGoals,
 			double penaltyConcededGoals) {
 		super();
-		this.team = team;
 		this.totalMadeShots = totalMadeShots;
 		this.openPlayMadeShots = openPlayMadeShots;
 		this.freeKickMadeShots = freeKickMadeShots;
@@ -27,10 +25,6 @@ public class TeamHomeStats {
 		this.openPlayConcededGoals = openPlayConcededGoals;
 		this.freeKickConcededGoals = freeKickConcededGoals;
 		this.penaltyConcededGoals = penaltyConcededGoals;
-	}
-
-	public Team getTeam() {
-		return team;
 	}
 	
 	public double getTotalMadeShots() {
@@ -146,28 +140,12 @@ public class TeamHomeStats {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((team == null) ? 0 : team.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		TeamHomeStats other = (TeamHomeStats) obj;
-		if (team == null) {
-			if (other.team != null)
-				return false;
-		} else if (!team.equals(other.team))
-			return false;
-		return true;
+	public String toString() {
+		return String.format(
+				"[totalMadeShots=%s, openPlayMadeShots=%s, freeKickMadeShots=%s, penaltyMadeShots=%s, openPlayMadeGoals=%s, freeKickMadeGoals=%s, penaltyMadeGoals=%s, totalConcededShots=%s, openPlayConcededShots=%s, freeKickConcededShots=%s, penaltyConcededShots=%s, openPlayConcededGoals=%s, freeKickConcededGoals=%s, penaltyConcededGoals=%s]",
+				totalMadeShots, openPlayMadeShots, freeKickMadeShots, penaltyMadeShots, openPlayMadeGoals,
+				freeKickMadeGoals, penaltyMadeGoals, totalConcededShots, openPlayConcededShots, freeKickConcededShots,
+				penaltyConcededShots, openPlayConcededGoals, freeKickConcededGoals, penaltyConcededGoals);
 	}
 	
 }

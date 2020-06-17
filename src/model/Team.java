@@ -6,10 +6,11 @@ public class Team {
 	private String teamName;
 	private int homeMatches, homeWins, homeDraws, homeLosses, homeMadeGoals, homeConcededGoals;
 	private int awayMatches, awayWins, awayDraws, awayLosses, awayMadeGoals, awayConcededGoals;
+	private TeamStats homeStats, awayStats;
 	
 	public Team(int teamId, String teamName, int homeMatches, int homeWins, int homeDraws, int homeLosses,
 			int homeMadeGoals, int homeConcededGoals, int awayMatches, int awayWins, int awayDraws, int awayLosses,
-			int awayMadeGoals, int awayConcededGoals) {
+			int awayMadeGoals, int awayConcededGoals, TeamStats homeStats, TeamStats awayStats) {
 		super();
 		this.teamId = teamId;
 		this.teamName = teamName;
@@ -25,6 +26,8 @@ public class Team {
 		this.awayLosses = awayLosses;
 		this.awayMadeGoals = awayMadeGoals;
 		this.awayConcededGoals = awayConcededGoals;
+		this.homeStats = homeStats;
+		this.awayStats = awayStats;
 	}
 
 	public int getTeamId() {
@@ -131,6 +134,22 @@ public class Team {
 		this.awayConcededGoals = awayConcededGoals;
 	}
 
+	public TeamStats getHomeStats() {
+		return homeStats;
+	}
+
+	public void setHomeStats(TeamStats homeStats) {
+		this.homeStats = homeStats;
+	}
+
+	public TeamStats getAwayStats() {
+		return awayStats;
+	}
+
+	public void setAwayStats(TeamStats awayStats) {
+		this.awayStats = awayStats;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -152,5 +171,15 @@ public class Team {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"[teamName=%s, matches=%s, wins=%s, draws=%s, losses=%s, madeGoals=%s, concededGoals=%s, homeStats=%s, awayStats=%s]",
+				teamName, homeMatches+awayMatches, homeWins+awayWins, homeDraws+awayDraws, homeLosses+awayLosses, 
+				homeMadeGoals+awayMadeGoals, homeConcededGoals+awayConcededGoals, homeStats, awayStats);
+	}
+	
+	
 	
 }
