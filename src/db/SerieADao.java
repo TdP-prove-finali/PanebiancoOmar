@@ -41,11 +41,17 @@ public class SerieADao {
 					double homeOpenPlayConcededGoals = res.getDouble("sc.gol_azione_subiti");
 					double homeFreeKickConcededGoals = res.getDouble("sc.gol_piazzato_subiti");
 					double homePenaltyConcededGoals = res.getDouble("sc.gol_rigore_subiti");
+					double homeMadeOwnGoalProbability = res.getDouble("sc.prob_autogol_a_favore");
+					double homeConcededOwnGoalProbability = res.getDouble("sc.prob_autogol_contro");
+					double homeCommittedFouls = res.getDouble("sc.falli_fatti");
+					double homeTakenFouls = res.getDouble("sc.falli_subiti");
+					double homeRedCardProbability = res.getDouble("sc.prob_espulsione");
 					
 					TeamStats homeStats = new TeamStats(homeTotalMadeShots, homeOpenPlayMadeShots, homeFreeKickMadeShots, homePenaltyMadeShots,
 							homeOpenPlayMadeGoals, homeFreeKickMadeGoals, homePenaltyMadeGoals, 
 							homeTotalConcededShots, homeOpenPlayConcededShots, homeFreeKickConcededShots, homePenaltyConcededShots,
-							homeOpenPlayConcededGoals, homeFreeKickConcededGoals, homePenaltyConcededGoals);
+							homeOpenPlayConcededGoals, homeFreeKickConcededGoals, homePenaltyConcededGoals,
+							homeMadeOwnGoalProbability, homeConcededOwnGoalProbability, homeCommittedFouls, homeTakenFouls, homeRedCardProbability);
 					
 					double awayTotalMadeShots = res.getDouble("st.tiri_totali_fatti");
 					double awayOpenPlayMadeShots = res.getDouble("st.tiri_azione_fatti");
@@ -61,11 +67,17 @@ public class SerieADao {
 					double awayOpenPlayConcededGoals = res.getDouble("st.gol_azione_subiti");
 					double awayFreeKickConcededGoals = res.getDouble("st.gol_piazzato_subiti");
 					double awayPenaltyConcededGoals = res.getDouble("st.gol_rigore_subiti");
+					double awayMadeOwnGoalProbability = res.getDouble("st.prob_autogol_a_favore");
+					double awayConcededOwnGoalProbability = res.getDouble("st.prob_autogol_contro");
+					double awayCommittedFouls = res.getDouble("st.falli_fatti");
+					double awayTakenFouls = res.getDouble("st.falli_subiti");
+					double awayRedCardProbability = res.getDouble("st.prob_espulsione");
 					
 					TeamStats awayStats = new TeamStats(awayTotalMadeShots, awayOpenPlayMadeShots, awayFreeKickMadeShots, awayPenaltyMadeShots,
 							awayOpenPlayMadeGoals, awayFreeKickMadeGoals, awayPenaltyMadeGoals, 
 							awayTotalConcededShots, awayOpenPlayConcededShots, awayFreeKickConcededShots, awayPenaltyConcededShots,
-							awayOpenPlayConcededGoals, awayFreeKickConcededGoals, awayPenaltyConcededGoals);
+							awayOpenPlayConcededGoals, awayFreeKickConcededGoals, awayPenaltyConcededGoals,
+							awayMadeOwnGoalProbability, awayConcededOwnGoalProbability, awayCommittedFouls, awayTakenFouls, awayRedCardProbability);
 				
 					int teamId = res.getInt("s.id_squadra");
 					String teamName = res.getString("s.nome_squadra").toUpperCase();

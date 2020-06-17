@@ -4,12 +4,15 @@ public class TeamStats {
 	
 	private double totalMadeShots, openPlayMadeShots, freeKickMadeShots, penaltyMadeShots, openPlayMadeGoals, freeKickMadeGoals, penaltyMadeGoals;
 	private double totalConcededShots, openPlayConcededShots, freeKickConcededShots, penaltyConcededShots, openPlayConcededGoals, freeKickConcededGoals, penaltyConcededGoals;
+	private double madeOwnGoalProbability, concededOwnGoalProbability;
+	private double committedFouls, takenFouls, redCardProbability;
 	
-	public TeamStats(double totalMadeShots, double openPlayMadeShots, double freeKickMadeShots,
-			double penaltyMadeShots, double openPlayMadeGoals, double freeKickMadeGoals, double penaltyMadeGoals,
-			double totalConcededShots, double openPlayConcededShots, double freeKickConcededShots,
-			double penaltyConcededShots, double openPlayConcededGoals, double freeKickConcededGoals,
-			double penaltyConcededGoals) {
+	public TeamStats(double totalMadeShots, double openPlayMadeShots, double freeKickMadeShots, double penaltyMadeShots,
+			double openPlayMadeGoals, double freeKickMadeGoals, double penaltyMadeGoals, double totalConcededShots,
+			double openPlayConcededShots, double freeKickConcededShots, double penaltyConcededShots,
+			double openPlayConcededGoals, double freeKickConcededGoals, double penaltyConcededGoals,
+			double madeOwnGoalProbability, double concededOwnGoalProbability, double committedFouls, double takenFouls,
+			double redCardProbability) {
 		super();
 		this.totalMadeShots = totalMadeShots;
 		this.openPlayMadeShots = openPlayMadeShots;
@@ -25,8 +28,13 @@ public class TeamStats {
 		this.openPlayConcededGoals = openPlayConcededGoals;
 		this.freeKickConcededGoals = freeKickConcededGoals;
 		this.penaltyConcededGoals = penaltyConcededGoals;
+		this.madeOwnGoalProbability = madeOwnGoalProbability;
+		this.concededOwnGoalProbability = concededOwnGoalProbability;
+		this.committedFouls = committedFouls;
+		this.takenFouls = takenFouls;
+		this.redCardProbability = redCardProbability;
 	}
-	
+
 	public double getTotalMadeShots() {
 		return totalMadeShots;
 	}
@@ -139,13 +147,56 @@ public class TeamStats {
 		this.penaltyConcededGoals = penaltyConcededGoals;
 	}
 
+	public double getMadeOwnGoalProbability() {
+		return madeOwnGoalProbability;
+	}
+
+	public void setMadeOwnGoalProbability(double madeOwnGoalProbability) {
+		this.madeOwnGoalProbability = madeOwnGoalProbability;
+	}
+
+	public double getConcededOwnGoalProbability() {
+		return concededOwnGoalProbability;
+	}
+
+	public void setConcededOwnGoalProbability(double concededOwnGoalProbability) {
+		this.concededOwnGoalProbability = concededOwnGoalProbability;
+	}
+
+	public double getCommittedFouls() {
+		return committedFouls;
+	}
+
+	public void setCommittedFouls(double committedFouls) {
+		this.committedFouls = committedFouls;
+	}
+
+	public double getTakenFouls() {
+		return takenFouls;
+	}
+
+	public void setTakenFouls(double takenFouls) {
+		this.takenFouls = takenFouls;
+	}
+
+	public double getRedCardProbability() {
+		return redCardProbability;
+	}
+
+	public void setRedCardProbability(double redCardProbability) {
+		this.redCardProbability = redCardProbability;
+	}
+
 	@Override
 	public String toString() {
 		return String.format(
-				"[totalMadeShots=%s, openPlayMadeShots=%s, freeKickMadeShots=%s, penaltyMadeShots=%s, openPlayMadeGoals=%s, freeKickMadeGoals=%s, penaltyMadeGoals=%s, totalConcededShots=%s, openPlayConcededShots=%s, freeKickConcededShots=%s, penaltyConcededShots=%s, openPlayConcededGoals=%s, freeKickConcededGoals=%s, penaltyConcededGoals=%s]",
+				"[totalMadeShots=%s, openPlayMadeShots=%s, freeKickMadeShots=%s, penaltyMadeShots=%s, openPlayMadeGoals=%s, freeKickMadeGoals=%s, penaltyMadeGoals=%s, totalConcededShots=%s, openPlayConcededShots=%s, freeKickConcededShots=%s, penaltyConcededShots=%s, openPlayConcededGoals=%s, freeKickConcededGoals=%s, penaltyConcededGoals=%s, madeOwnGoalProbability=%s, concededOwnGoalProbability=%s, committedFouls=%s, takenFouls=%s, redCardProbability=%s]",
 				totalMadeShots, openPlayMadeShots, freeKickMadeShots, penaltyMadeShots, openPlayMadeGoals,
 				freeKickMadeGoals, penaltyMadeGoals, totalConcededShots, openPlayConcededShots, freeKickConcededShots,
-				penaltyConcededShots, openPlayConcededGoals, freeKickConcededGoals, penaltyConcededGoals);
+				penaltyConcededShots, openPlayConcededGoals, freeKickConcededGoals, penaltyConcededGoals,
+				madeOwnGoalProbability, concededOwnGoalProbability, committedFouls, takenFouls, redCardProbability);
 	}
+	
+	
 	
 }
