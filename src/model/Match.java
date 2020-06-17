@@ -2,13 +2,14 @@ package model;
 
 public class Match {
 	
-	private int matchId;
+	private int matchId, day;
 	private Team homeTeam, awayTeam;
 	private int homeTeamGoals, awayTeamGoals;
 	
-	public Match(int matchId, Team homeTeam, Team awayTeam, int homeTeamGoals, int awayTeamGoals) {
+	public Match(int matchId, int day, Team homeTeam, Team awayTeam, int homeTeamGoals, int awayTeamGoals) {
 		super();
 		this.matchId = matchId;
+		this.day = day;
 		this.homeTeam = homeTeam;
 		this.awayTeam = awayTeam;
 		this.homeTeamGoals = homeTeamGoals;
@@ -17,6 +18,10 @@ public class Match {
 
 	public int getMatchId() {
 		return matchId;
+	}
+	
+	public int getDay() {
+		return day;
 	}
 
 	public Team getHomeTeam() {
@@ -63,6 +68,16 @@ public class Match {
 		if (matchId != other.matchId)
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		if(homeTeamGoals == -1 || awayTeamGoals == -1)
+			return String.format("[day=%s, homeTeam=%s, awayTeam=%s, result=null]", 
+					day, homeTeam.getTeamName(), awayTeam.getTeamName());
+		else
+			return String.format("[day=%s, homeTeam=%s, awayTeam=%s, result=%s-%s]", 
+					day, homeTeam.getTeamName(), awayTeam.getTeamName(), homeTeamGoals, awayTeamGoals);
 	}
 
 }

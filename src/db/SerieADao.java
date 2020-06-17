@@ -5,17 +5,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import model.Match;
 import model.Team;
 import model.TeamStats;
 
 public class SerieADao {
 	
-	public List<Team> getTeamList() {
+	public List<Team> getTeamsList() {
 		String sql = "SELECT * FROM squadre s, statistiche_casa sc, statistiche_trasferta st "
 				+ "WHERE s.id_squadra = sc.id_squadra AND s.id_squadra = st.id_squadra";
-		List<Team> teamList = new ArrayList<>();
+		List<Team> teamsList = new ArrayList<>();
 		
 		try {
 			Connection conn = DBConnect.getConnection();
@@ -65,7 +68,7 @@ public class SerieADao {
 							awayOpenPlayConcededGoals, awayFreeKickConcededGoals, awayPenaltyConcededGoals);
 				
 					int teamId = res.getInt("s.id_squadra");
-					String teamName = res.getString("s.nome_squadra");
+					String teamName = res.getString("s.nome_squadra").toUpperCase();
 					int homeMatches = res.getInt("s.pg_casa");
 					int homeWins = res.getInt("s.v_casa");
 					int homeDraws = res.getInt("s.n_casa");
@@ -82,7 +85,7 @@ public class SerieADao {
 					Team team = new Team(teamId, teamName, homeMatches, homeWins, homeDraws, homeLosses, homeMadeGoals, homeConcededGoals, 
 							awayMatches, awayWins, awayDraws, awayLosses, awayMadeGoals, awayConcededGoals, homeStats, awayStats);
 					
-					teamList.add(team);
+					teamsList.add(team);
 					
 				} catch (Throwable t) {
 					t.printStackTrace();
@@ -90,7 +93,46 @@ public class SerieADao {
 			}
 			
 			conn.close();
-			return teamList;
+			return teamsList;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public List<Match> getMatchesList() {
+		List<Team> teamsList = getTeamsList();
+		Map<Integer, Team> teamsMap = new HashMap<>();
+		for(Team team : teamsList)
+			teamsMap.put(team.getTeamId(), team);
+		
+		String sql = "SELECT * FROM partite";
+		List<Match> matchesList = new ArrayList<>();
+		
+		try {
+			Connection conn = DBConnect.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);	
+			ResultSet res = st.executeQuery();
+			
+			while(res.next()) {
+				try {
+					int matchId = res.getInt("id_partita");
+					int day = res.getInt("giornata");
+					int homeTeamId = res.getInt("id_squadra_casa");
+					int awayTeamId = res.getInt("id_squadra_trasferta");
+					
+					Match match = new Match(matchId, day, teamsMap.get(homeTeamId), teamsMap.get(awayTeamId), -1, -1);
+					
+					matchesList.add(match);
+					
+				} catch (Throwable t) {
+					t.printStackTrace();
+				}
+			}
+			
+			conn.close();
+			return matchesList;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
