@@ -1,8 +1,140 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox alignment="CENTER" spacing="15.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="imgSerieALogoTitle" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+            <Label text="Serie A Simulator">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" spacing="25.0">
+               <children>
+                  <VBox spacing="15.0">
+                     <children>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label text="Settings" underline="true">
+                                 <font>
+                                    <Font name="System Italic" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <CheckBox fx:id="checkHomeFactor" mnemonicParsing="false" selected="true" text="Home Factor" />
+                        <VBox alignment="CENTER_LEFT" spacing="7.0">
+                           <children>
+                              <CheckBox fx:id="checkPointsFactor" mnemonicParsing="false" selected="true" text="Points Factor" />
+                              <Slider fx:id="sliderPointsFactor" blockIncrement="0.1" majorTickUnit="10.0" max="1.0" maxWidth="150.0" min="0.1" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0">
+                                 <VBox.margin>
+                                    <Insets left="24.0" />
+                                 </VBox.margin>
+                              </Slider>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER_LEFT" spacing="7.0">
+                           <children>
+                              <Label text="Red Card Multiplier" />
+                              <Slider fx:id="sliderRedCardMultiplier" blockIncrement="0.05" majorTickUnit="10.0" max="0.5" maxWidth="150.0" min="0.05" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="0.2">
+                                 <VBox.margin>
+                                    <Insets left="24.0" />
+                                 </VBox.margin>
+                              </Slider>
+                           </children>
+                        </VBox>
+                        <VBox spacing="7.0">
+                           <children>
+                              <Label text="Simulation Type" />
+                              <VBox spacing="7.0">
+                                 <children>
+                                    <RadioButton fx:id="radioStandardSimulation" mnemonicParsing="false" selected="true" text="Standard Simulation">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="toggleSimulation" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="radioQuickSimulation" mnemonicParsing="false" text="Quick Simulation" toggleGroup="$toggleSimulation" />
+                                    <VBox alignment="CENTER_LEFT" spacing="7.0">
+                                       <children>
+                                          <RadioButton fx:id="radioMultipleQuickSimulation" mnemonicParsing="false" text="Multiple Quick Simulation" toggleGroup="$toggleSimulation" />
+                                          <VBox disable="true" spacing="7.0">
+                                             <children>
+                                                <HBox fx:id="boxMultipleSimulation" alignment="CENTER_LEFT" spacing="7.0">
+                                                   <children>
+                                                      <Label text="Number of Simulations" />
+                                                      <TextField fx:id="textMultipleSimulationNumber" alignment="CENTER" maxWidth="70.0" text="100" />
+                                                   </children>
+                                                </HBox>
+                                                <VBox>
+                                                   <children>
+                                                      <Label text="n.b.: simulator might take much time by using">
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="a big number of simulations.">
+                                                         <VBox.margin>
+                                                            <Insets left="27.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="24.0" />
+                                             </VBox.margin>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="24.0" />
+                                 </VBox.margin>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#doStartSimulation" text="Start Simulation">
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="25.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="boxResult" alignment="CENTER" minHeight="600.0" minWidth="800.0" />
+               </children>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="15.0" left="25.0" right="25.0" top="5.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
 </BorderPane>
-
