@@ -30,6 +30,7 @@ public class Simulator {
 	double homeRedCardMultiplier;
 	double awayRedCarMultiplier;
 	double randomDouble;
+	double pointsFactor;
 	
 	private Match simulatedMatch;
 	private int homeGoals, awayGoals;
@@ -42,15 +43,14 @@ public class Simulator {
 	
 	public void init(Match match) {
 		queue.clear();
-		match.setHomeTeamGoals(-1);
-		match.setAwayTeamGoals(-1);
-		System.out.println("");
-		System.out.println("*****************************************************************************");
-		System.out.println(match);
 		
 		redCardMultiplier = model.getRedCardMultiplier();
 		homeRedCardMultiplier = 1;
 		awayRedCarMultiplier = 1;
+		
+		int homePoints = ((match.getHomeTeam().getHomeWins() + match.getHomeTeam().getAwayWins()) * 3) + (match.getHomeTeam().getHomeDraws() + match.getHomeTeam().getAwayDraws());
+		int awayPoints = ((match.getAwayTeam().getHomeWins() + match.getAwayTeam().getAwayWins()) * 3) + (match.getAwayTeam().getHomeDraws() + match.getAwayTeam().getAwayDraws());
+		pointsFactor = (double) (homePoints - awayPoints) / 100;
 		
 		simulatedMatch = match;
 		homeGoals = 0;
@@ -61,7 +61,7 @@ public class Simulator {
 		homeFouls = (match.getHomeTeam().getHomeStats().getCommittedFouls() + match.getAwayTeam().getAwayStats().getTakenFouls()) / 2;
 		awayFouls = (match.getAwayTeam().getAwayStats().getCommittedFouls() + match.getHomeTeam().getHomeStats().getTakenFouls()) / 2;
 		
-		for(int i = 0; i < homeShots; i ++) {
+		for(int i = 0; i < (homeShots * (1 + pointsFactor)); i ++) {
 			double homeOpenPlayMadeShots = match.getHomeTeam().getHomeStats().getOpenPlayMadeShots();
 			double awayOpenPlayConcededShots = match.getAwayTeam().getAwayStats().getOpenPlayConcededShots();
 			double mixedOpenPlayShots = (homeOpenPlayMadeShots + awayOpenPlayConcededShots) / 2;
@@ -83,14 +83,14 @@ public class Simulator {
 				double awayConcededGoalProbability = match.getAwayTeam().getAwayStats().getOpenPlayConcededGoals() / mixedOpenPlayShots;
 				double successRate = (homeMadeGoalProbability + awayConcededGoalProbability) / 2;
 				
-				queue.add(new Event(EventType.HOME_OPEN_PLAY, successRate));
+				queue.add(new Event(EventType.HOME_OPEN_PLAY, (successRate * (1 + pointsFactor))));
 				
 			} else if(randomDouble < (openPlayShotProbability + openFreeKickProbability)) {
 				double homeMadeGoalProbability = match.getHomeTeam().getHomeStats().getFreeKickMadeGoals() / mixedFreeKickShots;
 				double awayConcededGoalProbability = match.getAwayTeam().getAwayStats().getFreeKickConcededGoals() / mixedFreeKickShots;
 				double successRate = (homeMadeGoalProbability + awayConcededGoalProbability) / 2;
 				
-				queue.add(new Event(EventType.HOME_FREE_KICK, successRate));
+				queue.add(new Event(EventType.HOME_FREE_KICK, (successRate * (1 + pointsFactor))));
 				
 			} else {
 				double homeMadeGoalProbability = match.getHomeTeam().getHomeStats().getPenaltyMadeGoals() / mixedPenaltyShots;
@@ -101,7 +101,7 @@ public class Simulator {
 			}
 		}
 		
-		for(int i = 0; i < awayShots; i ++) {
+		for(int i = 0; i < (awayShots * (1 - pointsFactor)); i ++) {
 			double awayOpenPlayMadeShots = match.getAwayTeam().getAwayStats().getOpenPlayMadeShots();
 			double homeOpenPlayConcededShots = match.getHomeTeam().getHomeStats().getOpenPlayConcededShots();
 			double mixedOpenPlayShots = (awayOpenPlayMadeShots + homeOpenPlayConcededShots) / 2;
@@ -123,14 +123,14 @@ public class Simulator {
 				double homeConcededGoalProbability = match.getHomeTeam().getHomeStats().getOpenPlayConcededGoals() / mixedOpenPlayShots;
 				double successRate = (awayMadeGoalProbability + homeConcededGoalProbability) / 2;
 				
-				queue.add(new Event(EventType.AWAY_OPEN_PLAY, successRate));
+				queue.add(new Event(EventType.AWAY_OPEN_PLAY, (successRate * (1 - pointsFactor))));
 				
 			} else if(randomDouble < (openPlayShotProbability + openFreeKickProbability)) {
 				double awayMadeGoalProbability = match.getAwayTeam().getAwayStats().getFreeKickMadeGoals() / mixedFreeKickShots;
 				double homeConcededGoalProbability = match.getHomeTeam().getHomeStats().getFreeKickConcededGoals() / mixedFreeKickShots;
 				double successRate = (awayMadeGoalProbability + homeConcededGoalProbability) / 2;
 				
-				queue.add(new Event(EventType.AWAY_FREE_KICK, successRate));
+				queue.add(new Event(EventType.AWAY_FREE_KICK, (successRate * (1 - pointsFactor))));
 				
 			} else {
 				double awayMadeGoalProbability = match.getAwayTeam().getAwayStats().getPenaltyMadeGoals() / mixedPenaltyShots;
@@ -145,106 +145,78 @@ public class Simulator {
 		double awayMadeOwnGoalProbability = match.getAwayTeam().getAwayStats().getMadeOwnGoalProbability();
 		double homeOwnGoalsuccessRate = (homeConcededOwnGoalProbability + awayMadeOwnGoalProbability) / 2;
 		
-		queue.add(new Event(EventType.HOME_OWN_GOAL, homeOwnGoalsuccessRate));
+		queue.add(new Event(EventType.HOME_OWN_GOAL, (homeOwnGoalsuccessRate * (1 - pointsFactor))));
 		
 		double awayConcededOwnGoalProbability = match.getAwayTeam().getAwayStats().getConcededOwnGoalProbability();
 		double homeMadeOwnGoalProbability = match.getHomeTeam().getHomeStats().getMadeOwnGoalProbability();
 		double awayOwnGoalsuccessRate = (awayConcededOwnGoalProbability + homeMadeOwnGoalProbability) / 2;
 		
-		queue.add(new Event(EventType.AWAY_OWN_GOAL, awayOwnGoalsuccessRate));
+		queue.add(new Event(EventType.AWAY_OWN_GOAL, (awayOwnGoalsuccessRate * (1 + pointsFactor))));
 		
-		for(int i = 0; i < homeFouls; i ++) {
+		for(int i = 0; i < (homeFouls * (1 - pointsFactor)); i ++) {
 			double successRate = match.getHomeTeam().getHomeStats().getRedCardProbability();
 			
-			queue.add(new Event(EventType.HOME_FOUL, successRate));
+			queue.add(new Event(EventType.HOME_FOUL, (successRate * (1 - pointsFactor))));
 		}
 		
-		for(int i = 0; i < awayFouls; i ++) {
+		for(int i = 0; i < (awayFouls * (1 + pointsFactor)); i ++) {
 			double successRate = match.getAwayTeam().getAwayStats().getRedCardProbability();
 			
-			queue.add(new Event(EventType.AWAY_FOUL, successRate));
+			queue.add(new Event(EventType.AWAY_FOUL, (successRate * (1 + pointsFactor))));
 		}
 	}
 	
 	public void run() {
-		System.out.println("Simulation started...");
-		System.out.println("");
-		
 		while(!queue.isEmpty()) {
 			Event event = queue.poll();
-			System.out.print(event + ": ");
 			
 			randomDouble = random.nextDouble();
 			switch(event.getType()) {
 				case HOME_OPEN_PLAY:
-					if(randomDouble < (event.getSuccessRate() * homeRedCardMultiplier)) {
+					if(randomDouble < (event.getSuccessRate() * homeRedCardMultiplier)) 
 						homeGoals ++;
-						System.out.println("GOAL");
-					} else
-						System.out.println("NO GOAL");
 					
 					break;
 					
 				case AWAY_OPEN_PLAY:
-					if(randomDouble < (event.getSuccessRate() * awayRedCarMultiplier)) {
+					if(randomDouble < (event.getSuccessRate() * awayRedCarMultiplier)) 
 						awayGoals ++;
-						System.out.println("GOAL");
-					} else
-						System.out.println("NO GOAL");
 					
 					break;
 					
 				case HOME_FREE_KICK:
-					if(randomDouble < (event.getSuccessRate() * homeRedCardMultiplier)) {
+					if(randomDouble < (event.getSuccessRate() * homeRedCardMultiplier)) 
 						homeGoals ++;
-						System.out.println("GOAL");
-					} else
-						System.out.println("NO GOAL");
 					
 					break;
 					
 				case AWAY_FREE_KICK:
-					if(randomDouble < (event.getSuccessRate() * awayRedCarMultiplier)) {
+					if(randomDouble < (event.getSuccessRate() * awayRedCarMultiplier)) 
 						awayGoals ++;
-						System.out.println("GOAL");
-					} else
-						System.out.println("NO GOAL");
 					
 					break;
 					
 				case HOME_PENALTY:
-					if(randomDouble < (event.getSuccessRate() * homeRedCardMultiplier)) {
+					if(randomDouble < (event.getSuccessRate() * homeRedCardMultiplier)) 
 						homeGoals ++;
-						System.out.println("GOAL");
-					} else
-						System.out.println("NO GOAL");
 					
 					break;
 					
 				case AWAY_PENALTY:
-					if(randomDouble < (event.getSuccessRate() * awayRedCarMultiplier)) {
+					if(randomDouble < (event.getSuccessRate() * awayRedCarMultiplier)) 
 						awayGoals ++;
-						System.out.println("GOAL");
-					} else
-						System.out.println("NO GOAL");
 					
 					break;
 					
 				case HOME_OWN_GOAL:
-					if(randomDouble < (event.getSuccessRate() * awayRedCarMultiplier)) {
+					if(randomDouble < (event.getSuccessRate() * awayRedCarMultiplier)) 
 						awayGoals ++;
-						System.out.println("GOAL");
-					} else
-						System.out.println("NO GOAL");
 					
 					break;
 					
 				case AWAY_OWN_GOAL:
-					if(randomDouble < (event.getSuccessRate() * homeRedCardMultiplier)) {
+					if(randomDouble < (event.getSuccessRate() * homeRedCardMultiplier)) 
 						homeGoals ++;
-						System.out.println("GOAL");
-					} else
-						System.out.println("NO GOAL");
 					
 					break;
 					
@@ -252,9 +224,7 @@ public class Simulator {
 					if(randomDouble < event.getSuccessRate()) {
 						awayRedCarMultiplier += redCardMultiplier;
 						homeRedCardMultiplier -= redCardMultiplier;
-						System.out.println("RED CARD");
-					} else
-						System.out.println("NO RED CARD");
+					}
 					
 					break;
 					
@@ -262,9 +232,7 @@ public class Simulator {
 					if(randomDouble < event.getSuccessRate()) {
 						homeRedCardMultiplier += redCardMultiplier;
 						awayRedCarMultiplier -= redCardMultiplier;
-						System.out.println("RED CARD");
-					} else
-						System.out.println("NO RED CARD");
+					}
 					
 					break;
 			}
@@ -272,10 +240,6 @@ public class Simulator {
 		
 		simulatedMatch.setHomeTeamGoals(homeGoals);
 		simulatedMatch.setAwayTeamGoals(awayGoals);
-		
-		System.out.println("");
-		System.out.println("Simulation ended.");
-		System.out.println(simulatedMatch);
 	}
 
 	public int getHomeGoals() {

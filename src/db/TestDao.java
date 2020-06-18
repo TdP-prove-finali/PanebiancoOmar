@@ -1,5 +1,7 @@
 package db;
 
+import java.util.ArrayList;
+
 import model.Match;
 import model.Team;
 
@@ -9,7 +11,7 @@ public class TestDao {
 
 		SerieADao dao = new SerieADao();
 		
-		for(Team team : dao.getTeamsList())
+		for(Team team : new ArrayList<>(dao.getTeamsMap().values()))
 			System.out.println(team);
 		
 		for(Match match : dao.getMatchesList())

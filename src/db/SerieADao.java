@@ -15,10 +15,10 @@ import model.TeamStats;
 
 public class SerieADao {
 	
-	public List<Team> getTeamsList() {
+	public Map<String, Team> getTeamsMap() {
 		String sql = "SELECT * FROM squadre s, statistiche_casa sc, statistiche_trasferta st "
 				+ "WHERE s.id_squadra = sc.id_squadra AND s.id_squadra = st.id_squadra";
-		List<Team> teamsList = new ArrayList<>();
+		Map<String, Team> teamsMap = new HashMap<>();
 		
 		try {
 			Connection conn = DBConnect.getConnection();
@@ -97,7 +97,7 @@ public class SerieADao {
 					Team team = new Team(teamId, teamName, homeMatches, homeWins, homeDraws, homeLosses, homeMadeGoals, homeConcededGoals, 
 							awayMatches, awayWins, awayDraws, awayLosses, awayMadeGoals, awayConcededGoals, homeStats, awayStats);
 					
-					teamsList.add(team);
+					teamsMap.put(team.getTeamName(), team);
 					
 				} catch (Throwable t) {
 					t.printStackTrace();
@@ -105,7 +105,7 @@ public class SerieADao {
 			}
 			
 			conn.close();
-			return teamsList;
+			return teamsMap;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -114,7 +114,7 @@ public class SerieADao {
 	}
 	
 	public List<Match> getMatchesList() {
-		List<Team> teamsList = getTeamsList();
+		List<Team> teamsList = new ArrayList<>(getTeamsMap().values());
 		Map<Integer, Team> teamsMap = new HashMap<>();
 		for(Team team : teamsList)
 			teamsMap.put(team.getTeamId(), team);
