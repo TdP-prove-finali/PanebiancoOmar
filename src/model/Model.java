@@ -98,6 +98,22 @@ public class Model {
 		this.simulator = new Simulator(this);
 	}
 	
+	public void reset() {
+		this.firstDayToSimulate = 25;
+		this.nextDayToSimulate = 27;
+		this.lastDaytoSimulate = 38;
+		
+		this.leagueWinsPerTeamMap = new HashMap<>();
+		this.championsLeagueQualificationsPerTeamMap = new HashMap<>();
+		this.europaLeagueQualificationsPerTeamMap = new HashMap<>();
+		this.relegationsPerTeamMap = new HashMap<>();
+		
+		this.dao = new SerieADao();
+		this.teamsMap = dao.getTeamsMap();
+		this.matchesList = dao.getMatchesList();
+		this.simulator = new Simulator(this);
+	}
+	
 	public Map<Integer, List<Match>> startSimulation() {
 		Map<Integer, List<Match>> result = new HashMap<>();
 		List<Match> simulatedDay = new ArrayList<>();

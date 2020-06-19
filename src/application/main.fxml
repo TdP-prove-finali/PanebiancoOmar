@@ -122,7 +122,7 @@
                         </VBox>
                         <HBox alignment="CENTER">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#doStartSimulation" text="Start Simulation">
+                              <Button fx:id="buttonStartSimulation" mnemonicParsing="false" onAction="#doStartSimulation" text="Start Simulation">
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
@@ -189,180 +189,10 @@
                               <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                           </rowConstraints>
-                           <children>
-                              <Label text="POS" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="TEAM" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="PTS" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="PM" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="W" GridPane.columnIndex="4" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="D" GridPane.columnIndex="5" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="L" GridPane.columnIndex="6" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="GF" GridPane.columnIndex="7" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="GA" GridPane.columnIndex="8" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="HPM" GridPane.columnIndex="9" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="HW" GridPane.columnIndex="10" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="HD" GridPane.columnIndex="11" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="HL" GridPane.columnIndex="12" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="HGF" GridPane.columnIndex="13" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="HGA" GridPane.columnIndex="14" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="APM" GridPane.columnIndex="15" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="AW" GridPane.columnIndex="16" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="AD" GridPane.columnIndex="17" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="AL" GridPane.columnIndex="18" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="AGF" GridPane.columnIndex="19" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <Label text="AGA" GridPane.columnIndex="20" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" />
-                                 </GridPane.margin>
-                              </Label>
-                           </children>
                         </GridPane>
                         <HBox fx:id="boxDays" alignment="CENTER" spacing="35.0">
                            <children>
-                              <VBox fx:id="boxSimulatedDay" alignment="TOP_CENTER" opacity="0.0" spacing="15.0">
+                              <VBox fx:id="boxSimulatedDay" alignment="TOP_CENTER" spacing="15.0" visible="false">
                                  <children>
                                     <Label text="Simulated Day" underline="true" />
                                     <VBox alignment="CENTER" spacing="7.0">
@@ -390,7 +220,7 @@
                                     </VBox>
                                  </children>
                               </VBox>
-                              <VBox alignment="CENTER" spacing="15.0">
+                              <VBox fx:id="boxNextDay" alignment="CENTER" spacing="15.0">
                                  <children>
                                     <Label text="Next Day" underline="true" />
                                     <VBox alignment="TOP_CENTER" spacing="7.0">
@@ -417,11 +247,20 @@
                                     </VBox>
                                  </children>
                               </VBox>
-                              <Button fx:id="buttonSimulateNextDay" mnemonicParsing="false" onAction="#doSimulateNextDay" opacity="0.0" text="Simulate Next Day">
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                              </Button>
+                              <VBox alignment="CENTER_RIGHT" spacing="7.0">
+                                 <children>
+                                    <Button fx:id="buttonSimulateNextDay" mnemonicParsing="false" onAction="#doSimulateNextDay" text="Simulate Next Day" visible="false">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </Button>
+                                    <Button fx:id="buttonEndSimulation" disable="true" mnemonicParsing="false" onAction="#doEndSimulation" text="End Simulation" visible="false">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </Button>
+                                 </children>
+                              </VBox>
                            </children>
                         </HBox>
                      </children></VBox>
