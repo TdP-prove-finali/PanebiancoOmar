@@ -10,11 +10,14 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <top>
       <HBox alignment="CENTER" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
@@ -25,12 +28,15 @@
                </font>
             </Label>
          </children>
+         <BorderPane.margin>
+            <Insets top="15.0" />
+         </BorderPane.margin>
       </HBox>
    </top>
    <center>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" spacing="25.0">
+            <HBox alignment="CENTER" spacing="50.0">
                <children>
                   <VBox spacing="15.0">
                      <children>
@@ -47,7 +53,7 @@
                         <VBox alignment="CENTER_LEFT" spacing="7.0">
                            <children>
                               <CheckBox fx:id="checkPointsFactor" mnemonicParsing="false" selected="true" text="Points Factor" />
-                              <Slider fx:id="sliderPointsFactor" blockIncrement="0.1" majorTickUnit="10.0" max="1.0" maxWidth="150.0" min="0.1" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0">
+                              <Slider fx:id="sliderPointsFactor" blockIncrement="0.1" majorTickUnit="0.2" max="1.0" maxWidth="150.0" min="0.1" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0">
                                  <VBox.margin>
                                     <Insets left="24.0" />
                                  </VBox.margin>
@@ -57,7 +63,7 @@
                         <VBox alignment="CENTER_LEFT" spacing="7.0">
                            <children>
                               <Label text="Red Card Multiplier" />
-                              <Slider fx:id="sliderRedCardMultiplier" blockIncrement="0.05" majorTickUnit="10.0" max="0.5" maxWidth="150.0" min="0.05" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="0.2">
+                              <Slider fx:id="sliderRedCardMultiplier" blockIncrement="0.05" majorTickUnit="0.1" max="0.5" maxWidth="150.0" min="0.05" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="0.1">
                                  <VBox.margin>
                                     <Insets left="24.0" />
                                  </VBox.margin>
@@ -69,18 +75,18 @@
                               <Label text="Simulation Type" />
                               <VBox spacing="7.0">
                                  <children>
-                                    <RadioButton fx:id="radioStandardSimulation" mnemonicParsing="false" selected="true" text="Standard Simulation">
+                                    <RadioButton fx:id="radioStandardSimulation" mnemonicParsing="false" onAction="#doDisableMultipleSimulationBox" selected="true" text="Standard Simulation">
                                        <toggleGroup>
                                           <ToggleGroup fx:id="toggleSimulation" />
                                        </toggleGroup>
                                     </RadioButton>
-                                    <RadioButton fx:id="radioQuickSimulation" mnemonicParsing="false" text="Quick Simulation" toggleGroup="$toggleSimulation" />
+                                    <RadioButton fx:id="radioQuickSimulation" mnemonicParsing="false" onAction="#doDisableMultipleSimulationBox" text="Quick Simulation" toggleGroup="$toggleSimulation" />
                                     <VBox alignment="CENTER_LEFT" spacing="7.0">
                                        <children>
-                                          <RadioButton fx:id="radioMultipleQuickSimulation" mnemonicParsing="false" text="Multiple Quick Simulation" toggleGroup="$toggleSimulation" />
-                                          <VBox disable="true" spacing="7.0">
+                                          <RadioButton fx:id="radioMultipleQuickSimulation" mnemonicParsing="false" onAction="#doEnableMultipleSimulationBox" text="Multiple Quick Simulation" toggleGroup="$toggleSimulation" />
+                                          <VBox fx:id="boxMultipleSimulation" disable="true" spacing="7.0">
                                              <children>
-                                                <HBox fx:id="boxMultipleSimulation" alignment="CENTER_LEFT" spacing="7.0">
+                                                <HBox alignment="CENTER_LEFT" spacing="7.0">
                                                    <children>
                                                       <Label text="Number of Simulations" />
                                                       <TextField fx:id="textMultipleSimulationNumber" alignment="CENTER" maxWidth="70.0" text="100" />
@@ -128,12 +134,302 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox fx:id="boxResult" alignment="CENTER" minHeight="600.0" minWidth="800.0" />
+                  <VBox fx:id="boxResult" alignment="TOP_CENTER" spacing="25.0">
+                     <children>
+                        <Label text="League Teable" underline="true">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <GridPane fx:id="gridLeagueTable" hgap="5.0" vgap="5.0">
+                          <columnConstraints>
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints />
+                            <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="POS" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="TEAM" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="PTS" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="PM" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="W" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="D" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="L" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="GF" GridPane.columnIndex="7" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="GA" GridPane.columnIndex="8" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="HPM" GridPane.columnIndex="9" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="HW" GridPane.columnIndex="10" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="HD" GridPane.columnIndex="11" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="HL" GridPane.columnIndex="12" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="HGF" GridPane.columnIndex="13" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="HGA" GridPane.columnIndex="14" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="APM" GridPane.columnIndex="15" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="AW" GridPane.columnIndex="16" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="AD" GridPane.columnIndex="17" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="AL" GridPane.columnIndex="18" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="AGF" GridPane.columnIndex="19" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="AGA" GridPane.columnIndex="20" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                           </children>
+                        </GridPane>
+                        <HBox fx:id="boxDays" alignment="CENTER" spacing="35.0">
+                           <children>
+                              <VBox fx:id="boxSimulatedDay" alignment="TOP_CENTER" opacity="0.0" spacing="15.0">
+                                 <children>
+                                    <Label text="Simulated Day" underline="true" />
+                                    <VBox alignment="CENTER" spacing="7.0">
+                                       <children>
+                                          <Label fx:id="labelSimulatedDay" text="DAY xx" />
+                                          <GridPane fx:id="gridSimulatedDay" hgap="5.0" vgap="5.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                          </GridPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" spacing="15.0">
+                                 <children>
+                                    <Label text="Next Day" underline="true" />
+                                    <VBox alignment="TOP_CENTER" spacing="7.0">
+                                       <children>
+                                          <Label fx:id="labelNextDay" text="DAY xx" />
+                                          <GridPane fx:id="gridNextDay" hgap="5.0" vgap="5.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                          </GridPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                              <Button fx:id="buttonSimulateNextDay" mnemonicParsing="false" onAction="#doSimulateNextDay" opacity="0.0" text="Simulate Next Day">
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children></VBox>
                </children>
             </HBox>
          </children>
          <BorderPane.margin>
-            <Insets bottom="15.0" left="25.0" right="25.0" top="5.0" />
+            <Insets bottom="15.0" left="25.0" right="25.0" top="15.0" />
          </BorderPane.margin>
       </VBox>
    </center>

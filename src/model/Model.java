@@ -393,6 +393,30 @@ public class Model {
 		this.redCardMultiplier = redCardMultiplier;
 	}
 
+	public int getFirstDayToSimulate() {
+		return firstDayToSimulate;
+	}
+
+	public void setFirstDayToSimulate(int firstDayToSimulate) {
+		this.firstDayToSimulate = firstDayToSimulate;
+	}
+
+	public int getNextDayToSimulate() {
+		return nextDayToSimulate;
+	}
+
+	public void setNextDayToSimulate(int nextDayToSimulate) {
+		this.nextDayToSimulate = nextDayToSimulate;
+	}
+
+	public int getLastDaytoSimulate() {
+		return lastDaytoSimulate;
+	}
+
+	public void setLastDaytoSimulate(int lastDaytoSimulate) {
+		this.lastDaytoSimulate = lastDaytoSimulate;
+	}
+
 	public boolean isStandardSimulation() {
 		return standardSimulation;
 	}
@@ -423,6 +447,12 @@ public class Model {
 
 	public void setMultipleSimulationNumber(int multipleSimulationNumber) {
 		this.multipleSimulationNumber = multipleSimulationNumber;
+	}
+
+	public List<Team> getOrderedTeamsList() {
+		List<Team> orderedTeamsList = new ArrayList<>(this.teamsMap.values());
+		Collections.sort(orderedTeamsList, new ComparatorOfTeamsForLeagueTable());
+		return orderedTeamsList;
 	}
 
 }
