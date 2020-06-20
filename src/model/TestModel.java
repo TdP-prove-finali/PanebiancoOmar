@@ -1,15 +1,12 @@
 package model;
 
-import java.util.List;
-import java.util.Map;
-
 public class TestModel {
 
 	public static void main(String[] args) {
 		
 		boolean homeFactor = true;
 		boolean pointsFactorActivated = true;
-		double pointsFactor = 1.0;
+		double pointsFactor = 0.5;
 		double redCardMultiplier = 0.1;
 		
 		boolean standardSimulation = false;
@@ -24,18 +21,18 @@ public class TestModel {
 		System.out.println("*** STARTING SIMULATION... ***");
 		System.out.println("");
 		
-		Map<Integer, List<Match>> result = model.startSimulation();
+		model.startSimulation();
 		
-		if(result.size() == 1) {
+		if(model.getSimulatedDays().size() == 1) {
 			/* STANDARD SIMULATION */
-			System.out.println(model.printDay(result.get(25)));
+			System.out.println(model.printDay(model.getSimulatedDays().get(25)));
 			System.out.println(model.printLeagueTable());
 			
-		} else if(result.size() > 1) {
+		} else if(model.getSimulatedDays().size() > 1) {
 			/* QUICK SIMULATION */
-			System.out.println(model.printDay(result.get(25)));
+			System.out.println(model.printDay(model.getSimulatedDays().get(25)));
 			for(int i = 27; i <= 38; i ++)
-				System.out.println(model.printDay(result.get(i)));
+				System.out.println(model.printDay(model.getSimulatedDays().get(i)));
 			System.out.println(model.printLeagueTable());
 			
 		} else {

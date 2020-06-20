@@ -69,6 +69,7 @@ public class Model {
 	private SerieADao dao;
 	private Map<String, Team> teamsMap;
 	private List<Match> matchesList;
+	private Map<Integer, List<Match>> simulatedDays;
 	private Simulator simulator;
 	
 	public Model(boolean homeFactor, boolean pointsFactorActivated, double pointsFactor, double redCardMultiplier, 
@@ -95,6 +96,7 @@ public class Model {
 		this.dao = new SerieADao();
 		this.teamsMap = dao.getTeamsMap();
 		this.matchesList = dao.getMatchesList();
+		this.simulatedDays = new HashMap<>();
 		this.simulator = new Simulator(this);
 	}
 	
@@ -111,23 +113,23 @@ public class Model {
 		this.dao = new SerieADao();
 		this.teamsMap = dao.getTeamsMap();
 		this.matchesList = dao.getMatchesList();
+		this.simulatedDays = new HashMap<>();
 		this.simulator = new Simulator(this);
 	}
 	
-	public Map<Integer, List<Match>> startSimulation() {
-		Map<Integer, List<Match>> result = new HashMap<>();
+	public void startSimulation() {
 		List<Match> simulatedDay = new ArrayList<>();
 		
 		if(standardSimulation) {
 			simulatedDay = simulateDay(firstDayToSimulate);
-			result.put(firstDayToSimulate, simulatedDay);
+			simulatedDays.put(firstDayToSimulate, simulatedDay);
 			
 		} else if(quickSimulation) {
 			simulatedDay = simulateDay(firstDayToSimulate);
-			result.put(firstDayToSimulate, simulatedDay);
+			simulatedDays.put(firstDayToSimulate, simulatedDay);
 			for(int day = nextDayToSimulate; day <= lastDaytoSimulate; day ++) {
 				simulatedDay = simulateDay(day);
-				result.put(day, simulatedDay);
+				simulatedDays.put(day, simulatedDay);
 			}
 			
 		} else {
@@ -208,8 +210,6 @@ public class Model {
 				this.matchesList = dao.getMatchesList();
 			}
 		}
-		
-		return result;
 	}
 	
 	public List<Match> simulateDay(int day) {
@@ -469,6 +469,26 @@ public class Model {
 		List<Team> orderedTeamsList = new ArrayList<>(this.teamsMap.values());
 		Collections.sort(orderedTeamsList, new ComparatorOfTeamsForLeagueTable());
 		return orderedTeamsList;
+	}
+
+	public Map<Integer, List<Match>> getSimulatedDays() {
+		return simulatedDays;
+	}
+
+	public Map<Team, Integer> getLeagueWinsPerTeamMap() {
+		return leagueWinsPerTeamMap;
+	}
+
+	public Map<Team, Integer> getChampionsLeagueQualificationsPerTeamMap() {
+		return championsLeagueQualificationsPerTeamMap;
+	}
+
+	public Map<Team, Integer> getEuropaLeagueQualificationsPerTeamMap() {
+		return europaLeagueQualificationsPerTeamMap;
+	}
+
+	public Map<Team, Integer> getRelegationsPerTeamMap() {
+		return relegationsPerTeamMap;
 	}
 
 }

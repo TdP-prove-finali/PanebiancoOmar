@@ -5,6 +5,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -29,100 +30,124 @@
             </Label>
          </children>
          <BorderPane.margin>
-            <Insets top="15.0" />
+            <Insets top="25.0" />
          </BorderPane.margin>
       </HBox>
    </top>
    <center>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" spacing="50.0">
+            <HBox alignment="CENTER" spacing="100.0">
                <children>
                   <VBox spacing="15.0">
                      <children>
-                        <HBox alignment="CENTER">
+                        <VBox fx:id="boxSettings" spacing="15.0">
                            <children>
-                              <Label text="Settings" underline="true">
-                                 <font>
-                                    <Font name="System Italic" size="14.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <CheckBox fx:id="checkHomeFactor" mnemonicParsing="false" selected="true" text="Home Factor" />
-                        <VBox alignment="CENTER_LEFT" spacing="7.0">
-                           <children>
-                              <CheckBox fx:id="checkPointsFactor" mnemonicParsing="false" selected="true" text="Points Factor" />
-                              <Slider fx:id="sliderPointsFactor" blockIncrement="0.1" majorTickUnit="0.2" max="1.0" maxWidth="150.0" min="0.1" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0">
-                                 <VBox.margin>
-                                    <Insets left="24.0" />
-                                 </VBox.margin>
-                              </Slider>
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER_LEFT" spacing="7.0">
-                           <children>
-                              <Label text="Red Card Multiplier" />
-                              <Slider fx:id="sliderRedCardMultiplier" blockIncrement="0.05" majorTickUnit="0.1" max="0.5" maxWidth="150.0" min="0.05" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="0.1">
-                                 <VBox.margin>
-                                    <Insets left="24.0" />
-                                 </VBox.margin>
-                              </Slider>
-                           </children>
-                        </VBox>
-                        <VBox spacing="7.0">
-                           <children>
-                              <Label text="Simulation Type" />
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <Label text="Settings" underline="true">
+                                       <font>
+                                          <Font name="System Italic" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <CheckBox fx:id="checkHomeFactor" mnemonicParsing="false" selected="true" text="Home Factor" />
+                              <VBox alignment="CENTER_LEFT" spacing="7.0">
+                                 <children>
+                                    <CheckBox fx:id="checkPointsFactor" mnemonicParsing="false" selected="true" text="Points Factor" />
+                                    <Slider fx:id="sliderPointsFactor" blockIncrement="0.1" majorTickUnit="0.2" max="1.0" maxWidth="150.0" min="0.1" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="0.5">
+                                       <VBox.margin>
+                                          <Insets left="24.0" />
+                                       </VBox.margin>
+                                    </Slider>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" spacing="7.0">
+                                 <children>
+                                    <Label text="Red Card Multiplier" />
+                                    <Slider fx:id="sliderRedCardMultiplier" blockIncrement="0.05" majorTickUnit="0.1" max="0.5" maxWidth="150.0" min="0.05" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="0.1">
+                                       <VBox.margin>
+                                          <Insets left="24.0" />
+                                       </VBox.margin>
+                                    </Slider>
+                                 </children>
+                              </VBox>
                               <VBox spacing="7.0">
                                  <children>
-                                    <RadioButton fx:id="radioStandardSimulation" mnemonicParsing="false" onAction="#doDisableMultipleSimulationBox" selected="true" text="Standard Simulation">
-                                       <toggleGroup>
-                                          <ToggleGroup fx:id="toggleSimulation" />
-                                       </toggleGroup>
-                                    </RadioButton>
-                                    <RadioButton fx:id="radioQuickSimulation" mnemonicParsing="false" onAction="#doDisableMultipleSimulationBox" text="Quick Simulation" toggleGroup="$toggleSimulation" />
-                                    <VBox alignment="CENTER_LEFT" spacing="7.0">
+                                    <Label text="Simulation Type" />
+                                    <VBox spacing="7.0">
                                        <children>
-                                          <RadioButton fx:id="radioMultipleQuickSimulation" mnemonicParsing="false" onAction="#doEnableMultipleSimulationBox" text="Multiple Quick Simulation" toggleGroup="$toggleSimulation" />
-                                          <VBox fx:id="boxMultipleSimulation" disable="true" spacing="7.0">
+                                          <RadioButton fx:id="radioStandardSimulation" mnemonicParsing="false" onAction="#doDisableMultipleSimulationBox" selected="true" text="Standard Simulation">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="toggleSimulation" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                          <RadioButton fx:id="radioQuickSimulation" mnemonicParsing="false" onAction="#doDisableMultipleSimulationBox" text="Quick Simulation" toggleGroup="$toggleSimulation" />
+                                          <VBox alignment="CENTER_LEFT" spacing="7.0">
                                              <children>
-                                                <HBox alignment="CENTER_LEFT" spacing="7.0">
+                                                <RadioButton fx:id="radioMultipleQuickSimulation" mnemonicParsing="false" onAction="#doEnableMultipleSimulationBox" text="Multiple Quick Simulation" toggleGroup="$toggleSimulation" />
+                                                <VBox fx:id="boxMultipleSimulation" disable="true" spacing="7.0">
                                                    <children>
-                                                      <Label text="Number of Simulations" />
-                                                      <TextField fx:id="textMultipleSimulationNumber" alignment="CENTER" maxWidth="70.0" text="100" />
+                                                      <HBox alignment="CENTER_LEFT" spacing="7.0">
+                                                         <children>
+                                                            <Label text="Number of Simulations" />
+                                                            <TextField fx:id="textMultipleSimulationNumber" alignment="CENTER" maxWidth="70.0" text="100" />
+                                                         </children>
+                                                      </HBox>
+                                                      <VBox>
+                                                         <children>
+                                                            <Label text="n.b.: simulator might take much time by using">
+                                                               <font>
+                                                                  <Font name="System Bold" size="13.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label text="a big number of simulations.">
+                                                               <VBox.margin>
+                                                                  <Insets left="27.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </VBox>
                                                    </children>
-                                                </HBox>
-                                                <VBox>
-                                                   <children>
-                                                      <Label text="n.b.: simulator might take much time by using">
-                                                         <font>
-                                                            <Font name="System Bold" size="13.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label text="a big number of simulations.">
-                                                         <VBox.margin>
-                                                            <Insets left="27.0" />
-                                                         </VBox.margin>
-                                                      </Label>
-                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets left="24.0" />
+                                                   </VBox.margin>
                                                 </VBox>
                                              </children>
-                                             <VBox.margin>
-                                                <Insets left="24.0" />
-                                             </VBox.margin>
                                           </VBox>
                                        </children>
+                                       <VBox.margin>
+                                          <Insets left="24.0" />
+                                       </VBox.margin>
                                     </VBox>
                                  </children>
-                                 <VBox.margin>
-                                    <Insets left="24.0" />
-                                 </VBox.margin>
                               </VBox>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#doStartSimulation" text="Start Simulation">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="25.0" />
+                                 </VBox.margin>
+                              </HBox>
                            </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
                         </VBox>
-                        <HBox alignment="CENTER">
+                        <VBox alignment="CENTER" spacing="15.0">
                            <children>
-                              <Button fx:id="buttonStartSimulation" mnemonicParsing="false" onAction="#doStartSimulation" text="Start Simulation">
+                              <Button fx:id="buttonSimulateNextDay" mnemonicParsing="false" onAction="#doSimulateNextDay" text="Simulate Next Day" visible="false">
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </Button>
+                              <Button fx:id="buttonEndSimulation" disable="true" mnemonicParsing="false" onAction="#doEndSimulation" text="End Simulation" visible="false">
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
@@ -131,145 +156,278 @@
                            <VBox.margin>
                               <Insets top="25.0" />
                            </VBox.margin>
-                        </HBox>
+                        </VBox>
                      </children>
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
                   </VBox>
-                  <VBox fx:id="boxResult" alignment="TOP_CENTER" spacing="25.0">
-                     <children>
-                        <Label text="League Teable" underline="true">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <GridPane fx:id="gridLeagueTable" hgap="5.0" vgap="5.0">
-                          <columnConstraints>
-                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints />
-                            <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                        </GridPane>
-                        <HBox fx:id="boxDays" alignment="CENTER" spacing="35.0">
+                  <ScrollPane hbarPolicy="NEVER" maxHeight="1000.0">
+                     <content>
+                        <VBox alignment="TOP_CENTER">
                            <children>
-                              <VBox fx:id="boxSimulatedDay" alignment="TOP_CENTER" spacing="15.0" visible="false">
+                              <VBox fx:id="boxResultSS" spacing="25.0">
                                  <children>
-                                    <Label text="Simulated Day" underline="true" />
-                                    <VBox alignment="CENTER" spacing="7.0">
+                                    <VBox alignment="TOP_CENTER" spacing="25.0">
                                        <children>
-                                          <Label fx:id="labelSimulatedDay" text="DAY xx" />
-                                          <GridPane fx:id="gridSimulatedDay" hgap="5.0" vgap="5.0">
+                                          <Label text="League Teable" underline="true">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <GridPane fx:id="gridLeagueTableSS" hgap="5.0" vgap="5.0">
                                             <columnConstraints>
-                                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="50.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
                                             </columnConstraints>
                                             <rowConstraints>
-                                              <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                              <RowConstraints />
+                                              <RowConstraints minHeight="15.0" valignment="CENTER" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                           </GridPane>
                                        </children>
                                     </VBox>
+                                    <HBox alignment="TOP_CENTER" minHeight="274.0" spacing="50.0">
+                                       <children>
+                                          <VBox fx:id="boxSimulatedDay" alignment="TOP_CENTER" minWidth="300.0" spacing="15.0" visible="false">
+                                             <children>
+                                                <Label text="Simulated Day" underline="true" />
+                                                <VBox alignment="CENTER" spacing="7.0">
+                                                   <children>
+                                                      <Label fx:id="labelSimulatedDay" text="DAY xx" />
+                                                      <GridPane fx:id="gridSimulatedDay" hgap="5.0" vgap="5.0">
+                                                        <columnConstraints>
+                                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                                                        </columnConstraints>
+                                                        <rowConstraints>
+                                                          <RowConstraints minHeight="15.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                                        </rowConstraints>
+                                                      </GridPane>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                          <VBox fx:id="boxNextDay" alignment="TOP_CENTER" minWidth="300.0" spacing="15.0">
+                                             <children>
+                                                <Label text="Next Day" underline="true" />
+                                                <VBox alignment="TOP_CENTER" spacing="7.0">
+                                                   <children>
+                                                      <Label fx:id="labelNextDay" text="DAY xx" />
+                                                      <GridPane fx:id="gridNextDay" hgap="5.0" vgap="5.0">
+                                                         <columnConstraints>
+                                                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                                                         </columnConstraints>
+                                                         <rowConstraints>
+                                                            <RowConstraints minHeight="15.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                                         </rowConstraints>
+                                                      </GridPane>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
                                  </children>
                               </VBox>
-                              <VBox fx:id="boxNextDay" alignment="CENTER" spacing="15.0">
+                              <VBox fx:id="boxResultQS" spacing="25.0">
                                  <children>
-                                    <Label text="Next Day" underline="true" />
-                                    <VBox alignment="TOP_CENTER" spacing="7.0">
+                                    <VBox alignment="TOP_CENTER" spacing="25.0">
                                        <children>
-                                          <Label fx:id="labelNextDay" text="DAY xx" />
-                                          <GridPane fx:id="gridNextDay" hgap="5.0" vgap="5.0">
+                                          <Label text="League Teable" underline="true">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <GridPane fx:id="gridLeagueTableQS" hgap="5.0" vgap="5.0">
                                              <columnConstraints>
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
                                                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="50.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="25.0" />
                                              </columnConstraints>
                                              <rowConstraints>
-                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                                <RowConstraints />
+                                                <RowConstraints minHeight="15.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                          </GridPane>
+                                       </children>
+                                    </VBox>
+                                    <HBox alignment="TOP_CENTER" minHeight="274.0" spacing="50.0">
+                                       <children>
+                                          <VBox alignment="CENTER">
+                                             <children>
+                                                <Button fx:id="buttonShowPreviousDay" mnemonicParsing="false" onAction="#doShowPreviousDay" text="◄" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="TOP_CENTER" minWidth="300.0" spacing="15.0">
+                                             <children>
+                                                <Label text="Simulated Days" underline="true" />
+                                                <VBox alignment="CENTER" spacing="7.0">
+                                                   <children>
+                                                      <Label fx:id="labelSimulatedDays" text="DAY xx" />
+                                                      <GridPane fx:id="gridSimulatedDays" hgap="5.0" vgap="5.0">
+                                                         <columnConstraints>
+                                                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                                                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                                                         </columnConstraints>
+                                                         <rowConstraints>
+                                                            <RowConstraints minHeight="15.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                                         </rowConstraints>
+                                                      </GridPane>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER">
+                                             <children>
+                                                <Button fx:id="buttonShowNextDay" disable="true" mnemonicParsing="false" onAction="#doShowNextDay" text="►" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox fx:id="boxResultMQS" alignment="TOP_CENTER" minHeight="805.0" minWidth="727.0" spacing="25.0">
+                                 <children>
+                                    <Label fx:id="labelNumberOfSimulations" text="Number of Simulations: xx" underline="true">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <VBox alignment="TOP_CENTER" spacing="10.0">
+                                       <children>
+                                          <Label text="LEAGUE WIN CHANCES">
+                                             <font>
+                                                <Font name="System Italic" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <GridPane fx:id="gridLeagueWinChances" hgap="50.0" vgap="5.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" />
+                                                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="15.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                          </GridPane>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="TOP_CENTER" spacing="10.0">
+                                       <children>
+                                          <Label text="CHAMPIONS LEAGUE QUALIFICATION CHANCES">
+                                             <font>
+                                                <Font name="System Italic" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <GridPane fx:id="gridChampionsLeagueQualificationChances" hgap="50.0" minWidth="200.0" vgap="5.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" />
+                                                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="15.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                          </GridPane>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="TOP_CENTER" spacing="10.0">
+                                       <children>
+                                          <Label text="EUROPA LEAGUE QUALIFICATION CHANCES">
+                                             <font>
+                                                <Font name="System Italic" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <GridPane fx:id="gridEuropaLeagueQualificationChances" hgap="50.0" minWidth="200.0" vgap="5.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" />
+                                                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="15.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                          </GridPane>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="TOP_CENTER" spacing="10.0">
+                                       <children>
+                                          <Label text="RELEGATION CHANCES">
+                                             <font>
+                                                <Font name="System Italic" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <GridPane fx:id="gridRelegationChances" hgap="50.0" minWidth="200.0" vgap="5.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" />
+                                                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="15.0" valignment="CENTER" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                           </GridPane>
                                        </children>
                                     </VBox>
                                  </children>
                               </VBox>
-                              <VBox alignment="CENTER_RIGHT" spacing="7.0">
-                                 <children>
-                                    <Button fx:id="buttonSimulateNextDay" mnemonicParsing="false" onAction="#doSimulateNextDay" text="Simulate Next Day" visible="false">
-                                       <padding>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </padding>
-                                    </Button>
-                                    <Button fx:id="buttonEndSimulation" disable="true" mnemonicParsing="false" onAction="#doEndSimulation" text="End Simulation" visible="false">
-                                       <padding>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </padding>
-                                    </Button>
-                                 </children>
-                              </VBox>
                            </children>
-                        </HBox>
-                     </children></VBox>
+                           <padding>
+                              <Insets bottom="5.0" left="10.0" right="25.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
                </children>
             </HBox>
          </children>
          <BorderPane.margin>
-            <Insets bottom="15.0" left="25.0" right="25.0" top="15.0" />
+            <Insets bottom="25.0" left="25.0" right="25.0" top="15.0" />
          </BorderPane.margin>
       </VBox>
    </center>
+   <bottom>
+      <Label opacity="0.5" text="Created by Omar Panebianco for it.polito.tdp/ProveFinali" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="5.0" />
+         </BorderPane.margin>
+         <font>
+            <Font name="System Italic" size="13.0" />
+         </font>
+      </Label>
+   </bottom>
 </BorderPane>

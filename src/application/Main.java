@@ -14,6 +14,7 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
 			BorderPane root = loader.load();
+			
 			MainController controller = loader.getController();
 			Model model = new Model(controller.loadHomeFactorSetting(), controller.loadPointsFactorSetting(), controller.loadPointsFactorValue(),
 					controller.loadRedCardMultiplierValue(), controller.loadStandardSimulationSetting(), controller.loadQuickSimulationSetting(),
@@ -23,6 +24,8 @@ public class Main extends Application {
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.setMinWidth(1208);
+			primaryStage.setMinHeight(748);
 			primaryStage.show();
 			
 		} catch(Exception e) {
