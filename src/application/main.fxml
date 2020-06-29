@@ -170,7 +170,7 @@
                                  <children>
                                     <VBox alignment="TOP_CENTER" spacing="25.0">
                                        <children>
-                                          <Label text="League Teable" underline="true">
+                                          <Label text="League Table" underline="true">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
@@ -253,7 +253,7 @@
                                  <children>
                                     <VBox alignment="TOP_CENTER" spacing="25.0">
                                        <children>
-                                          <Label text="League Teable" underline="true">
+                                          <Label text="League Table" underline="true">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
