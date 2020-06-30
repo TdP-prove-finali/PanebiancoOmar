@@ -99,13 +99,16 @@
                                                          <children>
                                                             <Label text="n.b.: simulator might take much time by using">
                                                                <font>
-                                                                  <Font name="System Bold" size="13.0" />
+                                                                  <Font name="System Italic" size="13.0" />
                                                                </font>
                                                             </Label>
                                                             <Label text="a big number of simulations.">
                                                                <VBox.margin>
                                                                   <Insets left="27.0" />
                                                                </VBox.margin>
+                                                               <font>
+                                                                  <Font name="System Italic" size="13.0" />
+                                                               </font>
                                                             </Label>
                                                          </children>
                                                       </VBox>

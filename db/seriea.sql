@@ -21,6 +21,62 @@ SET NAMES utf8mb4;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
+CREATE DATABASE `seriea`;
+
+
+# Dump of table squadre
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `squadre`;
+
+CREATE TABLE `squadre` (
+  `id_squadra` int(11) NOT NULL,
+  `nome_squadra` varchar(255) NOT NULL,
+  `pg_casa` int(11) NOT NULL,
+  `v_casa` int(11) NOT NULL,
+  `n_casa` int(11) NOT NULL,
+  `p_casa` int(11) NOT NULL,
+  `gf_casa` int(11) NOT NULL,
+  `gs_casa` int(11) NOT NULL,
+  `pg_trasferta` int(11) NOT NULL,
+  `v_trasferta` int(11) NOT NULL,
+  `n_trasferta` int(11) NOT NULL,
+  `p_trasferta` int(11) NOT NULL,
+  `gf_trasferta` int(11) NOT NULL,
+  `gs_trasferta` int(11) NOT NULL,
+  PRIMARY KEY (`id_squadra`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+LOCK TABLES `squadre` WRITE;
+/*!40000 ALTER TABLE `squadre` DISABLE KEYS */;
+
+INSERT INTO `squadre` (`id_squadra`, `nome_squadra`, `pg_casa`, `v_casa`, `n_casa`, `p_casa`, `gf_casa`, `gs_casa`, `pg_trasferta`, `v_trasferta`, `n_trasferta`, `p_trasferta`, `gf_trasferta`, `gs_trasferta`)
+VALUES
+	(1,'atalanta',12,6,2,4,33,19,13,8,4,1,37,15),
+	(2,'bologna',13,4,5,4,18,20,13,5,2,6,20,22),
+	(3,'brescia',13,1,3,9,13,25,13,3,1,9,9,24),
+	(4,'cagliari',13,5,2,6,25,23,12,3,6,3,16,17),
+	(5,'fiorentina',13,3,5,5,13,17,13,4,4,5,19,19),
+	(6,'genoa',12,4,1,7,14,18,14,2,6,6,17,29),
+	(7,'inter',12,7,4,1,23,10,13,9,2,2,26,14),
+	(8,'juventus',13,12,1,0,31,10,13,8,2,3,19,14),
+	(9,'lazio',14,11,3,0,39,10,12,8,2,2,21,13),
+	(10,'lecce',13,2,5,6,19,26,13,4,2,7,15,30),
+	(11,'milan',13,4,5,4,13,15,13,6,1,6,15,19),
+	(12,'napoli',13,5,2,6,17,18,13,6,4,3,24,18),
+	(13,'parma',13,6,1,6,17,12,12,4,4,4,15,19),
+	(14,'roma',13,6,3,4,26,19,13,7,3,3,25,16),
+	(15,'sampdoria',14,4,4,6,16,22,11,3,1,7,12,22),
+	(16,'sassuolo',13,6,1,6,28,22,12,3,4,5,13,17),
+	(17,'spal',12,2,2,8,11,20,14,3,1,10,9,24),
+	(18,'torino',12,4,2,6,11,22,13,4,1,8,17,23),
+	(19,'udinese',13,5,4,4,10,12,13,2,3,8,11,25),
+	(20,'verona',12,6,3,3,17,12,13,3,5,5,12,14);
+
+/*!40000 ALTER TABLE `squadre` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
 # Dump of table partite
 # ------------------------------------------------------------
 
@@ -171,59 +227,6 @@ VALUES
 	(124,38,16,19,-1,-1);
 
 /*!40000 ALTER TABLE `partite` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table squadre
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `squadre`;
-
-CREATE TABLE `squadre` (
-  `id_squadra` int(11) NOT NULL,
-  `nome_squadra` varchar(255) NOT NULL,
-  `pg_casa` int(11) NOT NULL,
-  `v_casa` int(11) NOT NULL,
-  `n_casa` int(11) NOT NULL,
-  `p_casa` int(11) NOT NULL,
-  `gf_casa` int(11) NOT NULL,
-  `gs_casa` int(11) NOT NULL,
-  `pg_trasferta` int(11) NOT NULL,
-  `v_trasferta` int(11) NOT NULL,
-  `n_trasferta` int(11) NOT NULL,
-  `p_trasferta` int(11) NOT NULL,
-  `gf_trasferta` int(11) NOT NULL,
-  `gs_trasferta` int(11) NOT NULL,
-  PRIMARY KEY (`id_squadra`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-LOCK TABLES `squadre` WRITE;
-/*!40000 ALTER TABLE `squadre` DISABLE KEYS */;
-
-INSERT INTO `squadre` (`id_squadra`, `nome_squadra`, `pg_casa`, `v_casa`, `n_casa`, `p_casa`, `gf_casa`, `gs_casa`, `pg_trasferta`, `v_trasferta`, `n_trasferta`, `p_trasferta`, `gf_trasferta`, `gs_trasferta`)
-VALUES
-	(1,'atalanta',12,6,2,4,33,19,13,8,4,1,37,15),
-	(2,'bologna',13,4,5,4,18,20,13,5,2,6,20,22),
-	(3,'brescia',13,1,3,9,13,25,13,3,1,9,9,24),
-	(4,'cagliari',13,5,2,6,25,23,12,3,6,3,16,17),
-	(5,'fiorentina',13,3,5,5,13,17,13,4,4,5,19,19),
-	(6,'genoa',12,4,1,7,14,18,14,2,6,6,17,29),
-	(7,'inter',12,7,4,1,23,10,13,9,2,2,26,14),
-	(8,'juventus',13,12,1,0,31,10,13,8,2,3,19,14),
-	(9,'lazio',14,11,3,0,39,10,12,8,2,2,21,13),
-	(10,'lecce',13,2,5,6,19,26,13,4,2,7,15,30),
-	(11,'milan',13,4,5,4,13,15,13,6,1,6,15,19),
-	(12,'napoli',13,5,2,6,17,18,13,6,4,3,24,18),
-	(13,'parma',13,6,1,6,17,12,12,4,4,4,15,19),
-	(14,'roma',13,6,3,4,26,19,13,7,3,3,25,16),
-	(15,'sampdoria',14,4,4,6,16,22,11,3,1,7,12,22),
-	(16,'sassuolo',13,6,1,6,28,22,12,3,4,5,13,17),
-	(17,'spal',12,2,2,8,11,20,14,3,1,10,9,24),
-	(18,'torino',12,4,2,6,11,22,13,4,1,8,17,23),
-	(19,'udinese',13,5,4,4,10,12,13,2,3,8,11,25),
-	(20,'verona',12,6,3,3,17,12,13,3,5,5,12,14);
-
-/*!40000 ALTER TABLE `squadre` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
