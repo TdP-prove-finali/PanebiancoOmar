@@ -60,10 +60,14 @@ public class Simulator {
 		awayGoals = 0;
 		
 		if(model.isHomeFactor()) {
-			homeShots = (match.getHomeTeam().getHomeStats().getTotalMadeShots() + match.getAwayTeam().getAwayStats().getTotalConcededShots()) / 2;
-			awayShots = (match.getAwayTeam().getAwayStats().getTotalMadeShots() + match.getHomeTeam().getHomeStats().getTotalConcededShots()) / 2;
-			homeFouls = (match.getHomeTeam().getHomeStats().getCommittedFouls() + match.getAwayTeam().getAwayStats().getTakenFouls()) / 2;
-			awayFouls = (match.getAwayTeam().getAwayStats().getCommittedFouls() + match.getHomeTeam().getHomeStats().getTakenFouls()) / 2;
+			homeShots = (match.getHomeTeam().getHomeStats().getTotalMadeShots() 
+					+ match.getAwayTeam().getAwayStats().getTotalConcededShots()) / 2;
+			awayShots = (match.getAwayTeam().getAwayStats().getTotalMadeShots() 
+					+ match.getHomeTeam().getHomeStats().getTotalConcededShots()) / 2;
+			homeFouls = (match.getHomeTeam().getHomeStats().getCommittedFouls() 
+					+ match.getAwayTeam().getAwayStats().getTakenFouls()) / 2;
+			awayFouls = (match.getAwayTeam().getAwayStats().getCommittedFouls() 
+					+ match.getHomeTeam().getHomeStats().getTakenFouls()) / 2;
 			
 			for(int i = 0; i < (homeShots * (1 + pointsFactor)); i ++) {
 				double homeOpenPlayMadeShots = match.getHomeTeam().getHomeStats().getOpenPlayMadeShots();

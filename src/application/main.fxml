@@ -423,14 +423,4 @@
          </BorderPane.margin>
       </VBox>
    </center>
-   <bottom>
-      <Label opacity="0.5" text="Created by Omar Panebianco for it.polito.tdp/ProveFinali" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets bottom="5.0" />
-         </BorderPane.margin>
-         <font>
-            <Font name="System Italic" size="13.0" />
-         </font>
-      </Label>
-   </bottom>
 </BorderPane>
